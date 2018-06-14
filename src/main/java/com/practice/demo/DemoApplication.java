@@ -23,7 +23,5 @@ public class DemoApplication {
 		}
 		
 		
-		MyConfigModel configModel = (MyConfigModel) ctx.getBean("myConfigModel");
-		System.out.println(configModel.toString());
 	}
 }
