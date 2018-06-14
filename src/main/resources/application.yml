@@ -1,0 +1,6 @@
+myconfig:
+   app-name: Demo App
+   app-description: ${myconfig.app-name} project
+   admin-first-name: Anik
+   admin-last-name: Saha
+   adminEmail: anik.saha.4096@gmail.com 

@@ -4,9 +4,13 @@ import java.util.Arrays;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 
+import com.practice.demo.models.MyConfigModel;
+
 @SpringBootApplication
+@EnableConfigurationProperties
 public class DemoApplication {
 
 	public static void main(String[] args) {
@@ -17,5 +21,9 @@ public class DemoApplication {
 		for(String name: beanNames) {
 			System.out.println(name);
 		}
+		
+		
+		MyConfigModel configModel = (MyConfigModel) ctx.getBean("myConfigModel");
+		System.out.println(configModel.toString());
 	}
 }
