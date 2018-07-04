@@ -1,11 +1,14 @@
 package com.practice.demo.controller;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import java.net.URI;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,11 +34,18 @@ public class UserResourceController {
 	}
 	
 	@GetMapping("/users/{id}")
-	public User retrieveAUser(@PathVariable int id) {
+	public Resource retrieveAUser(@PathVariable int id) {
 		User user = userDaoService.findOne(id);
 		if(user == null)
 			throw new UserNotFoundException("id-"+id);
-		return user;
+		
+		
+		//implemenetion hateoas
+		// hateoas means link inside a http call
+		Resource<User> resource = new Resource<User>(user);
+		ControllerLinkBuilder  linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
+		resource.add(linkTo.withRel("all-users"));
+		return resource;
 	}
 	
 	@PostMapping("/users")
