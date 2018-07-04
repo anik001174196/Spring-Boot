@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
 @SpringBootApplication
 @EnableConfigurationProperties
@@ -26,17 +26,10 @@ public class DemoApplication {
 
 	@Bean
 	public LocaleResolver localeResolver() {
-		SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+		AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
 		localeResolver.setDefaultLocale(Locale.US);
 		return localeResolver;
 	}
 
-	@Bean
-	public ResourceBundleMessageSource messageSource() {
-		ResourceBundleMessageSource messgaeSource = new ResourceBundleMessageSource();
-		// setBaseName should be equal to i18n base file message
-		messgaeSource.setBasename("messages");
-		return messgaeSource;
-
-	}
+	
 }
